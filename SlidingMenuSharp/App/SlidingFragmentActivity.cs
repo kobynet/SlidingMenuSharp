@@ -1,10 +1,11 @@
 using Android.OS;
 using Android.Support.V4.App;
+using Android.Support.V7.App;
 using Android.Views;
 
 namespace SlidingMenuSharp.App
 {
-    public class SlidingFragmentActivity : FragmentActivity, ISlidingActivity
+    public class SlidingFragmentActivity : ActionBarActivity, ISlidingActivity
     {
         private SlidingActivityHelper _helper;
 
