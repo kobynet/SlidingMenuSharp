@@ -99,7 +99,6 @@ ClientBin
 [Ss]tyle[Cc]op.*
 ~$*
 *.dbmdl
-Resource.Designer.cs
 
 Generated_Code #added for RIA/Silverlight projects
 
