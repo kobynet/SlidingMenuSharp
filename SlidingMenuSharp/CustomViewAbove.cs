@@ -24,7 +24,7 @@ namespace SlidingMenuSharp
         private const int MaxSettleDuration = 600; // ms
         private const int MinDistanceForFling = 25; // dips
 
-        private readonly IInterpolator _interpolator = new CVAInterpolator();
+        private IInterpolator _interpolator;
 
         private class CVAInterpolator : Java.Lang.Object, IInterpolator
         {
@@ -99,6 +99,9 @@ namespace SlidingMenuSharp
 
         void InitCustomViewAbove()
         {
+            if (Android.OS.Build.VERSION.SdkInt >= BuildVersionCodes.Honeycomb)
+                _interpolator = new CVAInterpolator();
+
             TouchMode = TouchMode.Margin;
             SetWillNotDraw(false);
             DescendantFocusability = DescendantFocusability.AfterDescendants;
