@@ -23,6 +23,7 @@ namespace SlidingMenuSharp
         public event EventHandler Close;
         public event EventHandler Opened;
         public event EventHandler Closed;
+        public PageScrolledEventHandler PageScrolled;
 
         public SlidingMenu(Context context) 
             : this(context, null)
@@ -58,6 +59,7 @@ namespace SlidingMenuSharp
 
             _viewAbove.Opened += (sender, args) => { if (null != Opened) Opened(sender, args); };
             _viewAbove.Closed += (sender, args) => { if (null != Closed) Closed(sender, args); };
+            _viewAbove.PageScrolled += (sender, args) => { if (null != PageScrolled) PageScrolled (sender, args); };
 
             var a = context.ObtainStyledAttributes(attrs, Resource.Styleable.SlidingMenu);
             var mode = a.GetInt(Resource.Styleable.SlidingMenu_mode, (int) MenuMode.Left);
