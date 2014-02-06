@@ -56,7 +56,6 @@ namespace SlidingMenuSharp
                     else if (args.Position == 2 && null != Close) //position close
                         Close(this, EventArgs.Empty);
                 };
-
             _viewAbove.Opened += (sender, args) => { if (null != Opened) Opened(sender, args); };
             _viewAbove.Closed += (sender, args) => { if (null != Closed) Closed(sender, args); };
             _viewAbove.PageScrolled += (sender, args) => { if (null != PageScrolled) PageScrolled (sender, args); };
@@ -167,6 +166,11 @@ namespace SlidingMenuSharp
         public void SetMenu(View v)
         {
             _viewBehind.Content = v;
+        }
+
+        public void SetAnimationDuration(int duration)
+        {
+            _viewAbove.AnimationDuration = duration;
         }
 
         public View GetMenu()
