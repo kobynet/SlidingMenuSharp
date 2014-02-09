@@ -146,6 +146,8 @@ namespace SlidingMenuSharp
             return _curItem;
         }
 
+        public int AnimationDuration { get; set; }
+
         void SetCurrentItemInternal(int item, bool smoothScroll, bool always, int velocity = 0)
         {
             if (!always && _curItem == item) {
@@ -300,16 +302,29 @@ namespace SlidingMenuSharp
             var distanceRatio = Math.Min(1f, 1.0f * Math.Abs(dx) / width);
             var distance = halfWidth + halfWidth * DistanceInfluenceForSnapDuration(distanceRatio);
             int duration;
-            velocity = Math.Abs(velocity);
-            if (velocity > 0)
-                duration = (int)(4 * Math.Round(1000 * Math.Abs(distance / velocity)));
-            else
+            //velocity = Math.Abs(velocity);
+            //if (velocity > 0)
+            //    duration = (int)(4 * Math.Round(1000 * Math.Abs(distance / velocity)));
+            //else
+            //{
+            //    var pageDelta = (float) Math.Abs(dx) / width;
+            //    duration = (int) ((pageDelta + 1) * 100);
+            //}
+            //duration = Math.Min(duration, MaxSettleDuration);
+            if (AnimationDuration == 0)
             {
-                var pageDelta = (float) Math.Abs(dx) / width;
-                duration = (int) ((pageDelta + 1) * 100);
+                velocity = Math.Abs(velocity);
+                if (velocity > 0)
+                    duration = (int)(4 * Math.Round(1000 * Math.Abs(distance / velocity)));
+                else
+                {
+                    var pageDelta = (float)Math.Abs(dx) / width;
+                    duration = (int)((pageDelta + 1) * 100);
+                }
+                duration = Math.Min(duration, MaxSettleDuration);
             }
-            duration = Math.Min(duration, MaxSettleDuration);
-
+            else
+                duration = AnimationDuration;
             _scroller.StartScroll(sx, sy, dx, dy, duration);
             Invalidate();
         }
